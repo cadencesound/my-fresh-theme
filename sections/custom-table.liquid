@@ -2,32 +2,6 @@
 
 <div class="container">
   <div class="custom-table">
-
-    {% assign serie = product.metafields.custom.serie.value %}
-    {% if serie %}
-      <h2>{{ serie.label }} Serie</h2>
-      <ul class="no-decor">
-        {%- if product.tags contains '2-way speaker' -%}
-          <li>
-            <strong>Basket:
-            </strong>
-            {{ serie.basket }}</li>
-          <li>
-            <strong>Cone</strong>
-            {{ serie.cone }}
-          </li>
-          <li>
-            <strong>Surround:
-            </strong>
-            {{ serie.surround }}</li>
-          <li>
-            <strong>Cone:
-            </strong>
-            {{ serie.cone }}</li>
-        {%- endif -%}
-      </ul>
-    {% endif %}
-
     <div>
       <h2>{{ section.settings.caption | escape }}</h2>
       <table>

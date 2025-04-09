@@ -661,7 +661,30 @@
               {%- when 'icon-with-text' -%}
                 {% render 'icon-with-text', block: block %}
 				
-			  
+			  {% comment %}
+				START of a CUSTOM component
+			  {% endcomment %}
+				{% when 'speaker-serie-info' %}
+				    {% assign serie = product.metafields.custom.serie.value %}
+						{% if serie %}
+						<h2>{{ serie.label }} Serie</h2>
+						<ul class="no-decor">
+							{%- if product.tags contains '2-way speaker' -%}
+							<li>{{ serie.basket }} Basket</li>
+							<li>{{ serie.cone }} Cone </li>
+							<li>{{ serie.surround }} Surround</li>
+							<li>{{ serie.voice_coil }} Voice Coil </li>
+							<li>{{ serie.magnet }} magnet</li>
+							{%- endif -%}
+							{% if product.tags contains 'amplifier' %}
+								
+							{% endif %}
+						</ul>
+						{% endif %}
+				{% comment %}
+					END of a CUSTOM Component
+				{% endcomment %}
+			
 			{%- endcase -%}
           {%- endfor -%}
           <a href="{{ product.url }}" class="link product__view-details animate-arrow">
@@ -2076,7 +2099,11 @@
           "info": "t:sections.main-product.blocks.icon_with_text.settings.heading.info"
         }
       ]
-    }
+    },
+	{
+		"type": "speaker-serie-info",
+		"name": "Speaker Serie"
+	}
   ],
   "settings": [
     {
