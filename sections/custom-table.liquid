@@ -1,0 +1,115 @@
+{{ 'custom-table.css' | asset_url | stylesheet_tag }}
+
+<div class="container">
+  <div class="custom-table">
+
+    {% assign serie = product.metafields.custom.serie.value %}
+    {% if serie %}
+      <h2>{{ serie.label }} Serie</h2>
+      <ul class="no-decor">
+        {%- if product.tags contains '2-way speaker' -%}
+          <li>
+            <strong>Basket:
+            </strong>
+            {{ serie.basket }}</li>
+          <li>
+            <strong>Cone</strong>
+            {{ serie.cone }}
+          </li>
+          <li>
+            <strong>Surround:
+            </strong>
+            {{ serie.surround }}</li>
+          <li>
+            <strong>Cone:
+            </strong>
+            {{ serie.cone }}</li>
+        {%- endif -%}
+      </ul>
+    {% endif %}
+
+    <div>
+      <h2>{{ section.settings.caption | escape }}</h2>
+      <table>
+        <thead>
+          <tr>
+            <td colspan="2">
+              <strong>{{ section.settings.thead }}</strong>
+            </td>
+          </tr>
+        </thead>
+        <tbody>
+          {%- for block in section.blocks -%}
+            <tr>
+              <td>
+                <strong>{{ block.settings.row_name }}</strong>
+              </td>
+              <td>
+                {{ block.settings.row_data }}
+              </td>
+            </tr>
+          {%- endfor -%}
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+</div>
+
+
+{% schema %}
+  {
+
+    "name": "Custom Table",
+    "tag": "section",
+    "settings": [
+      {
+        "type": "text",
+        "id": "caption",
+        "label": "Table Name",
+        "default": "Table Name"
+      }, {
+        "type": "text",
+        "id": "thead",
+        "label": "Table Header",
+        "default": "Header"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "table_row",
+        "name": "Table Row",
+        "settings": [
+          {
+            "type": "text",
+            "id": "row_name",
+            "label": "Custom Label",
+            "default": "Custom label"
+          }, {
+            "type": "richtext",
+            "id": "row_data",
+            "label": "Row Data",
+            "default": "<p>Row Data</p>"
+          }
+        ]
+      }
+
+    ],
+    "presets": [
+      {
+        "name": "Custom Table",
+        "blocks": [
+          {
+            "type": "table_row"
+          }, {
+            "type": "table_row"
+          }, {
+            "type": "table_row"
+          }, {
+            "type": "table_row"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}
