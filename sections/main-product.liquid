@@ -15,6 +15,7 @@
   {{ 'component-slider.css' | asset_url | stylesheet_tag }}
   {{ 'component-rating.css' | asset_url | stylesheet_tag }}
   {{ 'component-deferred-media.css' | asset_url | stylesheet_tag }}
+  {{ 'component-serie-info.css' | asset_url | stylesheet_tag }}
 
   {% unless product.has_only_default_variant %}
     {{ 'component-product-variant-picker.css' | asset_url | stylesheet_tag }}
@@ -660,32 +661,40 @@
                 </product-recommendations>
               {%- when 'icon-with-text' -%}
                 {% render 'icon-with-text', block: block %}
-				
-			  {% comment %}
-				START of a CUSTOM component
-			  {% endcomment %}
-				{% when 'speaker-serie-info' %}
-				    {% assign serie = product.metafields.custom.serie.value %}
-						{% if serie %}
-						<h2>{{ serie.label }} Serie</h2>
-						<ul class="no-decor">
-							{%- if product.tags contains '2-way speaker' -%}
-							<li>{{ serie.basket }} Basket</li>
-							<li>{{ serie.cone }} Cone </li>
-							<li>{{ serie.surround }} Surround</li>
-							<li>{{ serie.voice_coil }} Voice Coil </li>
-							<li>{{ serie.magnet }} magnet</li>
-							{%- endif -%}
-							{% if product.tags contains 'amplifier' %}
-								
-							{% endif %}
-						</ul>
-						{% endif %}
-				{% comment %}
-					END of a CUSTOM Component
-				{% endcomment %}
-			
-			{%- endcase -%}
+
+                {% comment %}
+                  START of a CUSTOM component
+                {% endcomment %}
+              {% when 'speaker-serie-info' %}
+                {% assign serie = product.metafields.custom.serie.value %}
+                {% if serie %}
+                  <div class="serie-list">
+                    <h2>{{ serie.label }} Serie Feature</h2>
+                    <ul>
+                      {%- if product.tags contains '2-way speaker' -%}
+                        {% if block.settings.show_basket %}
+                          <li>{{ serie.basket }} Basket</li>
+                        {% endif %}
+                        {% if block.settings.show_cone %}
+                          <li>{{ serie.cone }} Cone</li>
+                        {% endif %}
+                        {% if block.settings.show_surround %}
+                          <li>{{ serie.surround }} Surround</li>
+                        {% endif %}
+                        {% if block.settings.show_voice_coil %}
+                          <li>{{ serie.voice_coil }} Voice Coil</li>
+                        {% endif %}
+                        {% if block.settings.show_magnet %}
+                          <li>{{ serie.magnet }} Magnet</li>
+                        {% endif %}
+                      {%- endif -%}
+                    </ul>
+                  </div>
+                {% endif %}
+                {% comment %}
+                  END of a CUSTOM Component
+                {% endcomment %}
+            {%- endcase -%}
           {%- endfor -%}
           <a href="{{ product.url }}" class="link product__view-details animate-arrow">
             {{ 'products.product.view_full_details' | t }}
@@ -982,7 +991,8 @@
       "type": "collapsible_tab",
       "name": "t:sections.main-product.blocks.collapsible_tab.name",
       "settings": [
-        { // 這區是 collapsible_tab的general settings //
+        {
+          // 這區是 collapsible_tab的general settings //
           "type": "text",
           "id": "heading",
           "default": "t:sections.main-product.blocks.collapsible_tab.settings.heading.default",
@@ -2100,10 +2110,42 @@
         }
       ]
     },
-	{
-		"type": "speaker-serie-info",
-		"name": "Speaker Serie"
-	}
+    {
+      "type": "speaker-serie-info",
+      "name": "Speaker Serie",
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_basket",
+          "label": "Show Basket",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_cone",
+          "label": "Show Cone",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_surround",
+          "label": "Show Surround",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_voice_coil",
+          "label": "Show Voice Coil",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "show_magnet",
+          "label": "Show Magnet",
+          "default": true
+        }
+      ]
+    }
   ],
   "settings": [
     {

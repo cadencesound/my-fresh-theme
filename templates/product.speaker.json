@@ -49,6 +49,10 @@
 			"settings": {
 			  "share_label": "Share"
 			}
+		  },
+		  "speaker_serie_info_YDiKyU": {
+			"type": "speaker-serie-info",
+			"settings": {}
 		  }
 		},
 		"block_order": [
@@ -58,7 +62,8 @@
 		  "quantity_selector",
 		  "buy_buttons",
 		  "description",
-		  "share"
+		  "share",
+		  "speaker_serie_info_YDiKyU"
 		],
 		"settings": {
 		  "enable_sticky_info": false,
@@ -92,6 +97,89 @@
 		  "columns_mobile": "2",
 		  "padding_top": 8,
 		  "padding_bottom": 28
+		}
+	  },
+	  "custom_table_C7ypMx": {
+		"type": "custom-table",
+		"blocks": {
+		  "table_row_nAPbEq": {
+			"type": "table_row",
+			"settings": {
+			  "row_name": "Speaker Size",
+			  "row_data": "<p>{{ product.metafields.custom.speaker_size.value.label.value }}</p>"
+			}
+		  },
+		  "table_row_B9WtEP": {
+			"type": "table_row",
+			"settings": {
+			  "row_name": "Type",
+			  "row_data": "<p>{{ product.metafields.custom.speaker_type.value }}</p>"
+			}
+		  },
+		  "table_row_G98af8": {
+			"type": "table_row",
+			"settings": {
+			  "row_name": "Voice Coil",
+			  "row_data": "<p>{{ product.metafields.custom.voice_coil_size | metafield_tag }} {{ product.metafields.custom.voice_coil_material.value }}</p>"
+			}
+		  },
+		  "table_row_jJNJm9": {
+			"type": "table_row",
+			"settings": {
+			  "row_name": "Handling Power",
+			  "row_data": "<p>{{ product.metafields.custom.rms_power.value }} RMS </p><p>{{ product.metafields.custom.peak_power.value }} Peak Power</p>"
+			}
+		  },
+		  "table_row_CezVUr": {
+			"type": "table_row",
+			"settings": {
+			  "row_name": "Frequency Response",
+			  "row_data": "<p>{{ product.metafields.custom.fr.value }}</p>"
+			}
+		  },
+		  "table_row_7H3GEW": {
+			"type": "table_row",
+			"settings": {
+			  "row_name": "Sensitivity (1W/1M)",
+			  "row_data": "<p> {{ product.metafields.custom.spl.value }}</p>"
+			}
+		  },
+		  "table_row_DD6ppi": {
+			"type": "table_row",
+			"settings": {
+			  "row_name": "Impedance",
+			  "row_data": "<p>{{ product.metafields.custom.impedance.value }}</p>"
+			}
+		  },
+		  "table_row_NbFnMx": {
+			"type": "table_row",
+			"settings": {
+			  "row_name": "Mounting Depth",
+			  "row_data": "<p>{{ product.metafields.custom.mounting_depth.value }}</p>"
+			}
+		  },
+		  "table_row_zKVedk": {
+			"type": "table_row",
+			"settings": {
+			  "row_name": "Magnet",
+			  "row_data": "<p>{{ product.metafields.custom.magnet_size.value }} / {{ product.metafields.custom.serie.value.magnet.value }}</p>"
+			}
+		  }
+		},
+		"block_order": [
+		  "table_row_nAPbEq",
+		  "table_row_B9WtEP",
+		  "table_row_G98af8",
+		  "table_row_jJNJm9",
+		  "table_row_CezVUr",
+		  "table_row_7H3GEW",
+		  "table_row_DD6ppi",
+		  "table_row_NbFnMx",
+		  "table_row_zKVedk"
+		],
+		"settings": {
+		  "caption": "General Spec",
+		  "thead": "{{ product.metafields.custom.model_number.value }}"
 		}
 	  },
 	  "collapsible_content_eYNHUA": {
@@ -128,8 +216,9 @@
 	},
 	"order": [
 	  "main",
-	  "related-products",
-	  "collapsible_content_eYNHUA"
+	  "custom_table_C7ypMx",
+	  "collapsible_content_eYNHUA",
+	  "related-products"
 	]
   }
   
