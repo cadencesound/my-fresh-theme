@@ -1,0 +1,123 @@
+{{ 'custom-table.css' | asset_url | stylesheet_tag }}
+
+<div class="container">	
+  <div class="spec-table">
+    <table>
+      <thead>
+        <tr>
+          <th colspan="2">{{ product.metafields.system.model_number.value }}</th>
+        </tr>
+      </thead>
+      {% assign serie = product.metafields.system.serie.value %}
+      {% assign speaker = product.metafields.speaker %}
+      {% assign audio = product.metafields.audio %}
+      {% if product.tags contains '2-way speaker' %}
+        <tbody>
+          <tr class="speaker_size">
+            <td><strong>Speaker Size</strong></td>
+            <td>{{ speaker.size.value.label.value }}</td>
+          </tr>
+          <tr>
+            <td><strong>Speaker Type</strong></td>
+            <td>{{ speaker.type.value }}</td>
+          </tr>
+          <tr>
+            <td><strong>Voice Coil</strong></td>
+            <td>
+              {{ speaker.voice_coil_size | metafield_text }}
+              {{ speaker.voice_coil_material }}
+            </td>
+          </tr>
+          {% if speaker.tweeter_design %}
+            <tr>
+              <td><strong>Tweeter</strong></td>
+              <td>{{ speaker.tweeter_design }}</td>
+            </tr>
+          {% endif %}
+          {% if speaker.midrange_design %}
+            <tr>
+              <td><strong>Midrange</strong></td>
+              <td>{{ speaker.midrange_design }}</td>
+            </tr>
+          {% endif %}
+          <tr>
+            <td><strong>Magnet</strong></td>
+            <td>
+              {{ speaker.magnet_size | metafield_text }}
+              {{ serie.magnet }}
+            </td>
+          </tr>
+          <tr>
+            <td><strong>Power Handling</strong></td>
+            <td>{{ speaker.rms_power }} RMS / {{ speaker.peak_power }} Max</td>
+          </tr>
+          <tr>
+            <td><strong>Frequency Response</strong></td>
+            <td>{{ audio.fr }}</td>
+          </tr>
+          <tr>
+            <td><strong>SPL @ 1 W / 1 m</strong></td>
+            <td>{{ speaker.spl }}</td>
+          </tr>
+          <tr>
+            <td><strong>Impedance</strong></td>
+            <td>{{ speaker.impedance }}</td>
+          </tr>
+          <tr>
+            <td><strong>Mounting Depth</strong></td>
+            <td>{{ speaker.mounting_depth }}</td>
+          </tr>
+        </tbody>
+      {% endif %}
+	  {%- comment -%}
+	     {% if product.tags contains 'amplifier' %}
+        <tbody>
+          <tr>
+            <td><strong>Channel</strong></td>
+            <td>{{ product.metafields.shopify['amplifier-configuration'] | metafield_text: field: 'label' }}</td>
+          </tr>
+          <tr class="amp-channel">
+            <td><strong>Amplifier IC</strong></td>
+            <td>Class {{ product.metafields.shopify['amplifier-class'] | metafield_text: field: 'label' }}</td>
+          </tr>
+          <tr>
+            {% assign amp = product.metafields.amp %}
+            <td><strong>RMS Power @ 1 ohm</strong></td>
+            <td>
+              {{ amp.rms | metafield_text: field: 'one_ohm' }}
+            </td>
+          </tr>
+
+          <tr>
+            <td><strong>RMS Power @ 2 Ohm</strong></td>
+            <td>{{ amp.rms | metafield_text: field: 'two_ohm' }}</td>
+          </tr>
+        </tbody>
+      {% endif %}
+	   {%- endcomment -%}
+	  {% if product.type contains 'Amplifier' %}
+		{% assign amp_rms = product.metafields.amp.rms.value %}
+
+		<tr>
+			<td>RMS</td>
+			<td></td>
+		</tr>
+		
+	  {% endif %}
+
+    </table>
+	{%- assign amp_rms = product.metafields.amp.rms.value -%}
+	{%- if amp_rms != blank -%}
+	{%- for metaobject in amp_rms -%}
+		{%- if metaobject.one_ohm != blank -%}
+		<div class="amp-rms-label">
+			{{ metaobject.one_ohm }}
+		</div>
+		{%- else -%}
+		<p>Debug: Label field is empty for this Metaobject.</p>
+		{%- endif -%}
+	{%- endfor -%}
+	{%- else -%}
+	<p>Debug: amp.rms Metafield is not set or has no value.</p>
+	{%- endif -%}
+</div>

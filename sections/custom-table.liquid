@@ -28,57 +28,60 @@
   </div>
 </div>
 {% schema %}
-  {
-
-    "name": "Custom Table",
-    "tag": "section",
-    "settings": [
-      {
-        "type": "text",
-        "id": "caption",
-        "label": "Table Name",
-        "default": "Table Name"
-      }, {
-        "type": "text",
-        "id": "thead",
-        "label": "Table Header",
-        "default": "Header"
-      }
-    ],
-    "blocks": [
-      {
-        "type": "table_row",
-        "name": "Table Row",
-        "settings": [
-          {
-            "type": "text",
-            "id": "row_name",
-            "label": "Custom Label",
-            "default": "Custom label"
-          }, {
-            "type": "richtext",
-            "id": "row_data",
-            "label": "Row Data",
-          }
-        ]
-      }
-
-    ],
-    "presets": [
-      {
-        "name": "Custom Table",
-        "blocks": [
-          {
-            "type": "table_row"
-          }, {
-            "type": "table_row"
-          }, {
-            "type": "table_row"
-          }, {
-            "type": "table_row"
-          }
-        ]
-      }
-    ]
-  }
+{
+  "name": "Custom Table",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "caption",
+      "label": "Table Name",
+      "default": "Table Name"
+    },
+    {
+      "type": "text",
+      "id": "thead",
+      "label": "Table Header",
+      "default": "Header"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "table_row",
+      "name": "Table Row",
+      "settings": [
+        {
+          "type": "text",
+          "id": "row_name",
+          "label": "Custom Label",
+          "default": "Custom label"
+        },
+        {
+          "type": "richtext",
+          "id": "row_data",
+          "label": "Row Data"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Custom Table",
+      "blocks": [
+        {
+          "type": "table_row"
+        },
+        {
+          "type": "table_row"
+        },
+        {
+          "type": "table_row"
+        },
+        {
+          "type": "table_row"
+        }
+      ]
+    }
+  ]
+}
 {% endschema %}

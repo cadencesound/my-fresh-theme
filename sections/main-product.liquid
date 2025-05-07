@@ -666,7 +666,7 @@
                   START of a CUSTOM component
                 {% endcomment %}
               {% when 'speaker-serie-info' %}
-                {% assign serie = product.metafields.custom.serie.value %}
+                {% assign serie = product.metafields.system.serie.value %}
                 {% if serie %}
                   <div class="serie-list">
                     <h2>{{ serie.label }} Serie Feature</h2>
@@ -694,6 +694,9 @@
                 {% comment %}
                   END of a CUSTOM Component
                 {% endcomment %}
+              {% when 'spec-table' %}
+                <h2>{{ block.settings.spec_title }}</h2>
+                {% render 'spec-table' %}
             {%- endcase -%}
           {%- endfor -%}
           <a href="{{ product.url }}" class="link product__view-details animate-arrow">
@@ -2143,6 +2146,18 @@
           "id": "show_magnet",
           "label": "Show Magnet",
           "default": true
+        }
+      ]
+    },
+    {
+      "type": "spec-table",
+      "name": "Specification Table",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "spec_title",
+          "label": "Spec Title",
+          "default": "Specification Table"
         }
       ]
     }

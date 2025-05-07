@@ -106,63 +106,63 @@
 			"type": "table_row",
 			"settings": {
 			  "row_name": "Speaker Size",
-			  "row_data": "<p>{{ product.metafields.custom.speaker_size.value.label.value }}</p>"
+			  "row_data": "<p></p>"
 			}
 		  },
 		  "table_row_B9WtEP": {
 			"type": "table_row",
 			"settings": {
 			  "row_name": "Type",
-			  "row_data": "<p>{{ product.metafields.custom.speaker_type.value }}</p>"
+			  "row_data": "<p></p>"
 			}
 		  },
 		  "table_row_G98af8": {
 			"type": "table_row",
 			"settings": {
 			  "row_name": "Voice Coil",
-			  "row_data": "<p>{{ product.metafields.custom.voice_coil_size | metafield_tag }} {{ product.metafields.custom.voice_coil_material.value }}</p>"
+			  "row_data": "<p></p>"
 			}
 		  },
 		  "table_row_jJNJm9": {
 			"type": "table_row",
 			"settings": {
 			  "row_name": "Handling Power",
-			  "row_data": "<p>{{ product.metafields.custom.rms_power.value }} RMS </p><p>{{ product.metafields.custom.peak_power.value }} Peak Power</p>"
+			  "row_data": "<p></p>"
 			}
 		  },
 		  "table_row_CezVUr": {
 			"type": "table_row",
 			"settings": {
 			  "row_name": "Frequency Response",
-			  "row_data": "<p>{{ product.metafields.custom.fr.value }}</p>"
+			  "row_data": "<p></p>"
 			}
 		  },
 		  "table_row_7H3GEW": {
 			"type": "table_row",
 			"settings": {
 			  "row_name": "Sensitivity (1W/1M)",
-			  "row_data": "<p> {{ product.metafields.custom.spl.value }}</p>"
+			  "row_data": "<p></p>"
 			}
 		  },
 		  "table_row_DD6ppi": {
 			"type": "table_row",
 			"settings": {
 			  "row_name": "Impedance",
-			  "row_data": "<p>{{ product.metafields.custom.impedance.value }}</p>"
+			  "row_data": "<p></p>"
 			}
 		  },
 		  "table_row_NbFnMx": {
 			"type": "table_row",
 			"settings": {
 			  "row_name": "Mounting Depth",
-			  "row_data": "<p>{{ product.metafields.custom.mounting_depth.value }}</p>"
+			  "row_data": "<p></p>"
 			}
 		  },
 		  "table_row_zKVedk": {
 			"type": "table_row",
 			"settings": {
 			  "row_name": "Magnet",
-			  "row_data": "<p>{{ product.metafields.custom.magnet_size.value }} / {{ product.metafields.custom.serie.value.magnet.value }}</p>"
+			  "row_data": "<p></p>"
 			}
 		  }
 		},
@@ -179,7 +179,7 @@
 		],
 		"settings": {
 		  "caption": "General Spec",
-		  "thead": "{{ product.metafields.custom.model_number.value }}"
+		  "thead": ""
 		}
 	  },
 	  "collapsible_content_eYNHUA": {
