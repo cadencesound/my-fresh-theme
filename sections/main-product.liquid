@@ -666,31 +666,44 @@
                   START of a CUSTOM component
                 {% endcomment %}
               {% when 'speaker-serie-info' %}
-                {% assign serie = product.metafields.system.serie.value %}
-                {% if serie %}
-                  <div class="serie-list">
-                    <h2>{{ serie.label }} Serie Feature</h2>
-                    <ul>
-                      {%- if product.tags contains '2-way speaker' -%}
-                        {% if block.settings.show_basket %}
-                          <li>{{ serie.basket }} Basket</li>
-                        {% endif %}
-                        {% if block.settings.show_cone %}
-                          <li>{{ serie.cone }} Cone</li>
-                        {% endif %}
-                        {% if block.settings.show_surround %}
-                          <li>{{ serie.surround }} Surround</li>
-                        {% endif %}
-                        {% if block.settings.show_voice_coil %}
-                          <li>{{ serie.voice_coil }} Voice Coil</li>
-                        {% endif %}
-                        {% if block.settings.show_magnet %}
-                          <li>{{ serie.magnet }} Magnet</li>
-                        {% endif %}
-                      {%- endif -%}
-                    </ul>
-                  </div>
+                {% if product.metafields.system.serie != blank %}
+                  {% assign serie = product.metafields.system.serie.value %}
+                  {% if serie != blank %}
+                    <div class="serie-list">
+                      <h2>{{ serie.label }} Serie Feature</h2>
+                      <ul>
+                        {%- if product.tags contains '2-way speaker' -%}
+                          {% if block.settings.show_basket %}
+                            {% if serie.basket != blank %}
+                              <li>{{ serie.basket }} Basket</li>
+                            {% endif %}
+                          {% endif %}
+                          {% if block.settings.show_cone %}
+                            {% if serie.cone != blank %}
+                              <li>{{ serie.cone }} Cone</li>
+                            {% endif %}
+                          {% endif %}
+                          {% if block.settings.show_surround %}
+                            {% if serie.surround != blank %}
+                              <li>{{ serie.surround }} Surround</li>
+                            {% endif %}
+                          {% endif %}
+                          {% if block.settings.show_voice_coil %}
+                            {% if serie.voice_coil != blank %}
+                              <li>{{ serie.voice_coil }} Voice Coil</li>
+                            {% endif %}
+                          {% endif %}
+                          {% if block.settings.show_magnet %}
+                            {% if serie.magnet != blank %}
+                              <li>{{ serie.magnet }} Magnet</li>
+                            {% endif %}
+                          {% endif %}
+                        {%- endif -%}
+                      </ul>
+                    </div>
+                  {% endif %}
                 {% endif %}
+
                 {% comment %}
                   END of a CUSTOM Component
                 {% endcomment %}

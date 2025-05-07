@@ -96,28 +96,47 @@
       {% endif %}
 	   {%- endcomment -%}
 	  {% if product.type contains 'Amplifier' %}
-		{% assign amp_rms = product.metafields.amp.rms.value %}
-
-		<tr>
-			<td>RMS</td>
-			<td></td>
-		</tr>
-		
+		<tbody>
+			<tr>
+				<td><strong>Channel</strong></td>
+				<td>{{ product.metafields.shopify['amplifier-configuration'] | metafield_text: field: 'label' | default:'N/A' }}</td>
+			</tr>
+			<tr>
+				<td><strong>Amplifier IC</strong></td>
+				<td>{{ product.metafields.shopify['amplifier-class'] | metafield_text:field:'label' | default:'N/A' }}</td>
+			</tr>
+			{% assign amp_rms = product.metafields.amp.rms_power.value %}
+				{% if amp_rms.one_ohm != blank %}
+					<tr>
+						<td><strong>RMS Power @ 1 Ohm</strong></td>
+						<td>{{ amp_rms.one_ohm }}</td>
+					</tr>
+				{% endif %}
+				{% if amp_rms.two_ohm != blank %}
+					<tr>
+						<td><strong>RMS Power @ 2 Ohm</strong></td>
+						<td>{{ amp_rms.two_ohm }}</td>
+					</tr>
+				{% endif %}
+				{% if amp_rms.four_ohm != blank %}
+					<tr>
+						<td><strong>RMS Power @ 4 Ohm</strong></td>
+						<td>{{ amp_rms.four_ohm }}</td>
+					</tr>
+				{% endif %}
+				{% if amp_rms.bridged_four_ohm %}
+					<tr>
+						<td><strong>Bridged RMS Power @ 4 Ohm</strong></td>
+						<td>{{ amp_rms.bridged_four_ohm }}</td>
+					</tr>
+				{% endif %}
+		</tbody>
+	
 	  {% endif %}
 
     </table>
-	{%- assign amp_rms = product.metafields.amp.rms.value -%}
-	{%- if amp_rms != blank -%}
-	{%- for metaobject in amp_rms -%}
-		{%- if metaobject.one_ohm != blank -%}
-		<div class="amp-rms-label">
-			{{ metaobject.one_ohm }}
-		</div>
-		{%- else -%}
-		<p>Debug: Label field is empty for this Metaobject.</p>
-		{%- endif -%}
-	{%- endfor -%}
-	{%- else -%}
-	<p>Debug: amp.rms Metafield is not set or has no value.</p>
-	{%- endif -%}
+	<hr>
+	{% assign amp_rms = product.metafields.amp.rms_power.value %}
+	<p>{{ amp_rms.one_ohm }}</p>
+	<hr>
 </div>
