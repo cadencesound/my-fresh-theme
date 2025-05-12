@@ -105,38 +105,48 @@
 				<td><strong>Amplifier IC</strong></td>
 				<td>{{ product.metafields.shopify['amplifier-class'] | metafield_text:field:'label' | default:'N/A' }}</td>
 			</tr>
-			{% assign amp_rms = product.metafields.amp.rms_power.value %}
-				{% if amp_rms.one_ohm != blank %}
-					<tr>
-						<td><strong>RMS Power @ 1 Ohm</strong></td>
-						<td>{{ amp_rms.one_ohm }}</td>
-					</tr>
-				{% endif %}
-				{% if amp_rms.two_ohm != blank %}
-					<tr>
-						<td><strong>RMS Power @ 2 Ohm</strong></td>
-						<td>{{ amp_rms.two_ohm }}</td>
-					</tr>
-				{% endif %}
-				{% if amp_rms.four_ohm != blank %}
-					<tr>
-						<td><strong>RMS Power @ 4 Ohm</strong></td>
-						<td>{{ amp_rms.four_ohm }}</td>
-					</tr>
-				{% endif %}
-				{% if amp_rms.bridged_four_ohm %}
-					<tr>
-						<td><strong>Bridged RMS Power @ 4 Ohm</strong></td>
-						<td>{{ amp_rms.bridged_four_ohm }}</td>
-					</tr>
-				{% endif %}
+				{% assign specs = product.metafields.amplifier.specification.value %}
+				{% if specs != blank %}
+				{% assign spec_fields = 'rms_1_ohm,RMS Power @ 1 Ohm,text,false|rms_2_ohm,RMS Power @ 2 Ohm,text,false|rms_4_ohm,RMS Power @ 4 Ohm,text,false|rms_bridged_4_ohm,Bridged RMS Power @ 4 Ohm,text,false|fr,Frequency Responese,text,false|input_sensitivity,Input Sensitivity,text,false|thd,T.H.D,text,false|sn_ratio,S/N Ratio,text,false|low_pass_filter,Low Pass Filter,text,true|high_pass_filter,High Pass Filter,text,true|subsonic,Subsonic,text,false|bass_boost,Bass Boost,text,false|phase,Phase,boolean,false|input,Input,text,false|output,Output,text,false|fase_rate,Fase Rate,text,false|remote_control,Remote Control,boolean,false|weight,Weight,weight,false|dimension,Dimension,text,false' | split: '|' %}
+					{% for field in spec_fields %}
+					{% assign key_title_type = field | split: ',' %}
+					{% assign key = key_title_type[0] %}
+					{% assign title = key_title_type[1] %}
+					{% assign type = key_title_type[2] %}
+					{% if specs[key] != blank or type == 'boolean' %}
+						<tr>
+						<td><strong>{{ title }}</strong></td>
+						<td>
+							{% if type == 'text' %}
+							{{ specs[key] | default: 'N/A' }}
+							{% elsif type == 'weight' %}
+								{% if specs[key] != blank %}
+									{{ specs[key].value }} {{ specs[key].unit }}
+								{% else %}
+									N/A
+							{% endif %}	
+							{% elsif type == 'boolean' %}
+							{% if specs[key] == true %}
+								Yes
+								{% if key == 'low_pass_filter' or key == 'high_pass_filter' %}
+								{% assign range_key = key | append: '_range' %}
+								{% if specs[range_key] != blank %}
+									({{ specs[range_key] }})
+								{% endif %}
+								{% endif %}
+							{% else %}
+								No
+							{% endif %}
+							{% endif %}
+						</td>
+						</tr>
+					{% endif %}
+					{% endfor %}
 		</tbody>
 	
 	  {% endif %}
-
+	{% endif %}
     </table>
-	<hr>
-	{% assign amp_rms = product.metafields.amp.rms_power.value %}
-	<p>{{ amp_rms.one_ohm }}</p>
-	<hr>
+<hr>
+
 </div>
