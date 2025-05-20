@@ -672,7 +672,7 @@
                     <div class="serie-list">
                       <h2>{{ serie.label }} Serie Feature</h2>
                       <ul>
-                        {%- if product.tags contains '2-way speaker' -%}
+                        {%- if product.tags contains '2-way speaker' or 'Subwoofer' or 'Tweeter' -%}
                           {% if block.settings.show_basket %}
                             {% if serie.basket != blank %}
                               <li>{{ serie.basket }} Basket</li>
